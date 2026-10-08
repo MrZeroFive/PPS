@@ -48,6 +48,11 @@ const APP_CONFIG = {
     tiktok:   "https://www.tiktok.com/@ppsbalambat?_r=1&_t=ZN-9AEX3UTUQHm"
   },
 
+  // ---------- WhatsApp opening ----------
+  // 0 = WhatsApp opens at once when a Send button is pressed (recommended, no blank screen).
+  // 1500 = wait 1.5 seconds first (some phones then show a blank white page before WhatsApp).
+  whatsappDelayMs: 0,
+
   // ---------- WhatsApp numbers used by the app ----------
   // Principal Sahib's number (Homework Check "Send to Principal"). Digits only, country code first.
   principalWhatsApp: "923400968477",
@@ -1824,6 +1829,49 @@ body.splash-on .page-bg .blob,body.splash-on .profile::after{animation-play-stat
 body:not(.intro-done) .profile::after{animation-duration:6s}
 .blob{backface-visibility:hidden}
 html.is-offline .needs-net{opacity:.55}
+/* Homework check: selected chip = red + white text in Black / Golden themes */
+html[data-theme] #tab-homework label.hw-chip.on,
+html[data-theme] #tab-homework label.hw-chip.on:hover{background:#e53935 !important; border-color:#e53935 !important; color:#fff !important; box-shadow:0 6px 14px rgba(229,57,53,.40)}
+html[data-theme] #tab-homework label.hw-chip.on *{color:#fff !important}
+/* Homework: hidden toast must never show as a dark spot at the top */
+.hw-toast{opacity:0; visibility:hidden; pointer-events:none; box-shadow:none; transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s linear .35s}
+.hw-toast.show{opacity:1; visibility:visible; box-shadow:0 12px 30px rgba(0,0,0,.25); transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s}
+.hw-toast:empty{display:none}
+/* ---------- GOLDEN theme: rotating gold border (works in every browser: a spinning layer, no @property) ---------- */
+@keyframes goldRing{to{transform:rotate(360deg)}}
+html[data-theme="gold"]{--goldring:conic-gradient(from 0deg,#7a4e00,#ffe27a 22%,#fff8dc 38%,#c4900f 58%,#7a4e00 80%,#ffd75e,#7a4e00)}
+html[data-theme="gold"] nav.tiles .tile-orange,html[data-theme="gold"] nav.tiles .tile-marks,html[data-theme="gold"] nav.tiles .tile-register{--tilebg:var(--orange)}
+html[data-theme="gold"] nav.tiles .tile-deep,html[data-theme="gold"] nav.tiles .tile-teal{--tilebg:var(--deep)}
+html[data-theme="gold"] nav.tiles .tile{overflow:hidden; isolation:isolate; box-shadow:0 0 18px rgba(212,160,23,.4), var(--tile-shadow)}
+html[data-theme="gold"] nav.tiles .tile::before{content:""; position:absolute; z-index:-2; left:-50%; top:50%; width:200%; aspect-ratio:1/1; margin-top:-100%; background:var(--goldring); animation:goldRing 4s linear infinite}
+html[data-theme="gold"] nav.tiles .tile::after{content:""; position:absolute; z-index:-1; inset:2px; border-radius:20px; background:var(--tilebg)}
+html[data-theme="gold"] nav.tiles .tile:nth-child(odd)::before{animation-delay:-2s}
+html[data-theme="gold"] nav.tiles .tile.active{box-shadow:0 0 0 2px #ffd75e, 0 0 26px rgba(212,160,23,.55)}
+html[data-theme="gold"] header.profile{isolation:isolate; box-shadow:0 0 26px rgba(212,160,23,.4), 0 18px 40px rgba(110,75,5,.18)}
+html[data-theme="gold"] header.profile::after{display:block !important; content:""; position:absolute; z-index:0; left:-50%; top:50%; width:200%; aspect-ratio:1/1; margin-top:-100%; background:var(--goldring); animation:goldRing 5s linear infinite !important}
+html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; background:inherit}
+@media (prefers-reduced-motion:reduce){ html[data-theme="gold"] nav.tiles .tile::before,html[data-theme="gold"] header.profile::after{animation:none !important} }
+/* ---------- PRINT / PDF: always plain white paper, whatever theme is selected ---------- */
+@media print{
+  html[data-theme] body,html[data-theme]{background:#fff !important; color:#000}
+  html[data-theme] nav.tiles .tile::before,html[data-theme] nav.tiles .tile::after,html[data-theme] header.profile::after{display:none !important}
+  html[data-theme] #printArea,html[data-theme] #printArea *{text-shadow:none !important; filter:none !important}
+}
+
+/* ---------- CELEBRATION ("Good Job!") after sending to the Principal — no background, just the sign ---------- */
+#celebrate{position:fixed; inset:0; z-index:300; pointer-events:none; overflow:hidden; background:none}
+#celebrate .cf{position:absolute; left:50%; top:44%; width:var(--w,9px); height:var(--h,14px); background:var(--c); border-radius:2px; opacity:0;
+  animation:cfFly var(--d,1.9s) cubic-bezier(.15,.7,.3,1) forwards; animation-delay:var(--dl,0s)}
+@keyframes cfFly{0%{transform:translate(-50%,-50%) rotate(0) scale(.3); opacity:1} 65%{opacity:1} 100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r)) scale(1); opacity:0}}
+#celebrate .cbadge{position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); text-align:center; animation:cbPop .6s cubic-bezier(.2,1.5,.4,1) both, cbOut .5s ease 2.6s forwards}
+#celebrate .cbadge svg{width:112px; height:112px; display:block; margin:0 auto; filter:drop-shadow(0 6px 10px rgba(120,70,0,.45)); animation:cbSpin 1.6s ease-in-out 1}
+#celebrate .cbadge b{display:block; white-space:nowrap; margin-top:6px; font-family:'Baloo 2','Outfit',Arial,sans-serif; font-weight:800; font-size:44px; line-height:1; letter-spacing:.5px; color:#ff8a1a;
+  -webkit-text-stroke:7px #fff; paint-order:stroke fill; text-shadow:0 4px 10px rgba(0,0,0,.3)}
+@keyframes cbPop{from{transform:translate(-50%,-50%) scale(.2); opacity:0} to{transform:translate(-50%,-50%) scale(1); opacity:1}}
+@keyframes cbOut{to{opacity:0; transform:translate(-50%,-62%) scale(.9)}}
+@keyframes cbSpin{0%{transform:rotate(-18deg) scale(.8)} 40%{transform:rotate(10deg) scale(1.08)} 100%{transform:rotate(0) scale(1)}}
+@media (prefers-reduced-motion:reduce){ #celebrate .cf{display:none} #celebrate .cbadge svg{animation:none} }
+@media print{#celebrate{display:none !important}}
 </style>
 </head>
 <body class="view-home splash-on">
@@ -5100,7 +5148,9 @@ buildGlitchTitle("registerTitle","REGISTER MANAGEMENT");
     const msg=makeMessage();
     const phone=normalizePhone(number);
     const url="https://wa.me/"+phone+"?text="+encodeURIComponent(msg);
-    window.open(url,"_blank");
+    if(window.celebrateGoodJob) window.celebrateGoodJob("Thank You!");   /* sign first */
+    if(window.openWhatsAppAfterDelay) window.openWhatsAppAfterDelay(url, APP_CONFIG.whatsappDelayMs);   /* delay: see SETTINGS */
+    else window.open(url,"_blank");
   }
 
   addStudent("absent");
@@ -5843,7 +5893,10 @@ showHome();
     if(PRINCIPAL_WHATSAPP_NUMBER.indexOf("X") !== -1){ toast("Set the Principal Sahib's WhatsApp number in the code first."); return; }
 
     report += "\n*Total Reported Students:* " + valid;
-    window.open("https://wa.me/" + PRINCIPAL_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(report), "_blank");
+    if(window.celebrateGoodJob) window.celebrateGoodJob();   /* "Good Job!" sign */
+    var principalUrl = "https://wa.me/" + PRINCIPAL_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(report);
+    if(window.openWhatsAppAfterDelay) window.openWhatsAppAfterDelay(principalUrl, APP_CONFIG.whatsappDelayMs);   /* delay: see SETTINGS */
+    else window.open(principalUrl, "_blank");
   }
 
   /* floating school doodles (only visible on the Homework page) */
@@ -7565,6 +7618,60 @@ document.addEventListener('click', function(e){
   document.querySelectorAll('[data-cfg="schoolName"]').forEach(function(el){ el.textContent = cfg.schoolName; });
   document.querySelectorAll('[data-cfg="schoolNameUpper"]').forEach(function(el){ el.textContent = cfg.schoolName.toUpperCase(); });
   document.querySelectorAll('[data-cfg="footerText"]').forEach(function(el){ el.textContent = cfg.footerText; });
+})();
+</script>
+<script>
+/* ==========================================================================
+   CELEBRATION: shows a "Good Job!" / "Thank You!" sign with confetti (no background)
+   after a report is sent to the Principal or attendance is sent. Plays once per click.
+   ========================================================================== */
+(function(){
+  var COLORS = ["#ff8a2a","#ffd23f","#25d366","#1877f2","#ff4d6d","#b57bff","#26c6da"];
+  var MEDAL = '<svg viewBox="0 0 120 120" aria-hidden="true">'
+    + '<path d="M38 6h16l10 30H44z" fill="#e53935"/><path d="M82 6H66L56 36h20z" fill="#1e88e5"/>'
+    + '<circle cx="60" cy="72" r="38" fill="#ffc21a"/><circle cx="60" cy="72" r="31" fill="#ffdc5e"/><circle cx="60" cy="72" r="31" fill="none" stroke="#e39a00" stroke-width="3"/>'
+    + '<path d="M60 49l7.2 14.6 16.1 2.3-11.7 11.4 2.8 16-14.4-7.6-14.4 7.6 2.8-16-11.7-11.4 16.1-2.3z" fill="#ff8a1a" stroke="#e36a00" stroke-width="2" stroke-linejoin="round"/></svg>';
+  var timer = null, lastText = "Good Job!", waPending = false;
+
+  function show(text){
+    var old = document.getElementById("celebrate"); if(old) old.remove();
+    clearTimeout(timer);
+    var box = document.createElement("div");
+    box.id = "celebrate"; box.setAttribute("aria-hidden","true");
+    var h = "";
+    for(var i = 0; i < 56; i++){
+      var ang = Math.random() * Math.PI * 2, dist = 90 + Math.random() * 190;
+      var x = Math.cos(ang) * dist, y = Math.sin(ang) * dist * .8 + 70 + Math.random() * 120;
+      h += '<i class="cf" style="--c:' + COLORS[i % COLORS.length] + ';--x:' + x.toFixed(0) + 'px;--y:' + y.toFixed(0) + 'px;--r:' + ((Math.random() * 900 - 450) | 0) + 'deg;'
+        + '--w:' + (6 + Math.random() * 6).toFixed(0) + 'px;--h:' + (9 + Math.random() * 9).toFixed(0) + 'px;--d:' + (1.5 + Math.random() * 1).toFixed(2) + 's;--dl:' + (Math.random() * .25).toFixed(2) + 's"></i>';
+    }
+    box.innerHTML = h + '<div class="cbadge">' + MEDAL + '<b>' + (text || lastText) + '</b></div>';
+    document.body.appendChild(box);
+    timer = setTimeout(function(){ box.remove(); }, 3300);
+  }
+
+  window.celebrateGoodJob = function(text){ lastText = text || "Good Job!"; show(lastText); };
+
+  /* Opens WhatsApp (delay comes from SETTINGS: whatsappDelayMs, 0 = at once).
+     If the browser blocks the new tab, it opens in the same tab instead. */
+  window.openWhatsAppAfterDelay = function(url, ms){
+    ms = Number(ms) || 0;
+    if(ms <= 0){                       /* open at once, inside the click (never blocked) */
+      var w0 = null;
+      try{ w0 = window.open(url, "_blank"); }catch(e){}
+      if(!w0) window.location.href = url;
+      return;
+    }
+    if(waPending) return;
+    waPending = true;
+    setTimeout(function(){
+      waPending = false;
+      var w = null;
+      try{ w = window.open(url, "_blank"); }catch(e){}
+      if(!w) window.location.href = url;
+    }, ms);
+  };
+
 })();
 </script>
 <script>(function(){var h=document.querySelector("header.profile");if(!h)return;function t(){var d=new Date(),m=d.getHours()+d.getMinutes()/60;h.setAttribute("data-tod",(m>=16||m<6)?"night":(m>=10?"day":"morning"))}t();setInterval(t,60000)})();</script>
