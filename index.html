@@ -1931,6 +1931,12 @@ html body.view-section .backbtn{width:48px; height:48px; padding:0 !important; b
 html body.view-section .backbtn svg{width:24px; height:24px}
 html body.view-section .backbar{left:12px; bottom:calc(12px + env(safe-area-inset-bottom,0px))}
 html body.view-section{padding-bottom:78px !important}
+
+/* Print / Save-as-PDF is always on a white page, whatever theme is active */
+@media print{
+  html[data-theme],html[data-theme] body{background:#fff !important; color:#000}
+  html[data-theme] body::before,html[data-theme] .page-bg,html[data-theme] .bg-anim{display:none !important}
+}
 </style>
 </head>
 <body class="view-home splash-on">
@@ -7709,6 +7715,20 @@ document.addEventListener('click', function(e){
 (function(){
   function f(){ document.documentElement.classList.toggle("bg-paused", document.hidden); }
   document.addEventListener("visibilitychange", f); f();
+})();
+</script>
+<script>
+/* Print / Save-as-PDF: temporarily switch to the default (white) theme, then restore the chosen one */
+(function(){
+  var root=document.documentElement, saved=null;
+  function before(){ var t=root.getAttribute("data-theme"); if(t){ saved=t; root.removeAttribute("data-theme"); } }
+  function after(){ if(saved){ root.setAttribute("data-theme",saved); saved=null; } }
+  window.addEventListener("beforeprint",before);
+  window.addEventListener("afterprint",after);
+  if(window.matchMedia){
+    var mq=window.matchMedia("print"), h=function(e){ if(e.matches) before(); else after(); };
+    if(mq.addEventListener) mq.addEventListener("change",h); else if(mq.addListener) mq.addListener(h);
+  }
 })();
 </script>
 </body>
