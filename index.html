@@ -48,11 +48,6 @@ const APP_CONFIG = {
     tiktok:   "https://www.tiktok.com/@ppsbalambat?_r=1&_t=ZN-9AEX3UTUQHm"
   },
 
-  // ---------- WhatsApp opening ----------
-  // 0 = WhatsApp opens at once when a Send button is pressed (recommended, no blank screen).
-  // 1500 = wait 1.5 seconds first (some phones then show a blank white page before WhatsApp).
-  whatsappDelayMs: 0,
-
   // ---------- WhatsApp numbers used by the app ----------
   // Principal Sahib's number (Homework Check "Send to Principal"). Digits only, country code first.
   principalWhatsApp: "923400968477",
@@ -1837,44 +1832,110 @@ html[data-theme] #tab-homework label.hw-chip.on *{color:#fff !important}
 .hw-toast{opacity:0; visibility:hidden; pointer-events:none; box-shadow:none; transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s linear .35s}
 .hw-toast.show{opacity:1; visibility:visible; box-shadow:0 12px 30px rgba(0,0,0,.25); transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s}
 .hw-toast:empty{display:none}
-/* ---------- GOLDEN theme: rotating gold border (works in every browser: a spinning layer, no @property) ---------- */
-@keyframes goldRing{to{transform:rotate(360deg)}}
-html[data-theme="gold"]{--goldring:conic-gradient(from 0deg,#7a4e00,#ffe27a 22%,#fff8dc 38%,#c4900f 58%,#7a4e00 80%,#ffd75e,#7a4e00)}
-html[data-theme="gold"] nav.tiles .tile-orange,html[data-theme="gold"] nav.tiles .tile-marks,html[data-theme="gold"] nav.tiles .tile-register{--tilebg:var(--orange)}
-html[data-theme="gold"] nav.tiles .tile-deep,html[data-theme="gold"] nav.tiles .tile-teal{--tilebg:var(--deep)}
-html[data-theme="gold"] nav.tiles .tile{overflow:hidden; isolation:isolate; box-shadow:0 0 18px rgba(212,160,23,.4), var(--tile-shadow)}
-html[data-theme="gold"] nav.tiles .tile::before{content:""; position:absolute; z-index:-2; left:-50%; top:50%; width:200%; aspect-ratio:1/1; margin-top:-100%; background:var(--goldring); animation:goldRing 4s linear infinite}
-html[data-theme="gold"] nav.tiles .tile::after{content:""; position:absolute; z-index:-1; inset:2px; border-radius:20px; background:var(--tilebg)}
-html[data-theme="gold"] nav.tiles .tile:nth-child(odd)::before{animation-delay:-2s}
-html[data-theme="gold"] nav.tiles .tile.active{box-shadow:0 0 0 2px #ffd75e, 0 0 26px rgba(212,160,23,.55)}
-html[data-theme="gold"] header.profile{isolation:isolate; box-shadow:0 0 26px rgba(212,160,23,.4), 0 18px 40px rgba(110,75,5,.18)}
-html[data-theme="gold"] header.profile::after{display:block !important; content:""; position:absolute; z-index:0; left:-50%; top:50%; width:200%; aspect-ratio:1/1; margin-top:-100%; background:var(--goldring); animation:goldRing 5s linear infinite !important}
-html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; background:inherit}
-@media (prefers-reduced-motion:reduce){ html[data-theme="gold"] nav.tiles .tile::before,html[data-theme="gold"] header.profile::after{animation:none !important} }
-/* ---------- PRINT / PDF: always plain white paper, whatever theme is selected ---------- */
-@media print{
-  html[data-theme] body,html[data-theme]{background:#fff !important; color:#000}
-  html[data-theme] nav.tiles .tile::before,html[data-theme] nav.tiles .tile::after,html[data-theme] header.profile::after{display:none !important}
-  html[data-theme] #printArea,html[data-theme] #printArea *{text-shadow:none !important; filter:none !important}
+@media(max-width:520px){
+  #tab-homework .hw-checks{grid-template-columns:repeat(3,1fr); gap:6px}
+  #tab-homework label.hw-chip{flex-direction:column; justify-content:center; align-items:center; gap:4px; min-height:60px; padding:6px 3px; text-align:center; border-radius:14px; line-height:1.15}
+  #tab-homework label.hw-chip span:not(.ic){font-size:11px; font-weight:700; word-break:break-word}
+  #tab-homework label.hw-chip .ic .ico{width:18px; height:18px}
 }
-
-/* ---------- CELEBRATION ("Good Job!") after sending to the Principal — no background, just the sign ---------- */
-#celebrate{position:fixed; inset:0; z-index:300; pointer-events:none; overflow:hidden; background:none}
-#celebrate .cf{position:absolute; left:50%; top:44%; width:var(--w,9px); height:var(--h,14px); background:var(--c); border-radius:2px; opacity:0;
-  animation:cfFly var(--d,1.9s) cubic-bezier(.15,.7,.3,1) forwards; animation-delay:var(--dl,0s)}
-@keyframes cfFly{0%{transform:translate(-50%,-50%) rotate(0) scale(.3); opacity:1} 65%{opacity:1} 100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r)) scale(1); opacity:0}}
-#celebrate .cbadge{position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); text-align:center; animation:cbPop .6s cubic-bezier(.2,1.5,.4,1) both, cbOut .5s ease 2.6s forwards}
-#celebrate .cbadge svg{width:112px; height:112px; display:block; margin:0 auto; filter:drop-shadow(0 6px 10px rgba(120,70,0,.45)); animation:cbSpin 1.6s ease-in-out 1}
-#celebrate .cbadge b{display:block; white-space:nowrap; margin-top:6px; font-family:'Baloo 2','Outfit',Arial,sans-serif; font-weight:800; font-size:44px; line-height:1; letter-spacing:.5px; color:#ff8a1a;
-  -webkit-text-stroke:7px #fff; paint-order:stroke fill; text-shadow:0 4px 10px rgba(0,0,0,.3)}
-@keyframes cbPop{from{transform:translate(-50%,-50%) scale(.2); opacity:0} to{transform:translate(-50%,-50%) scale(1); opacity:1}}
-@keyframes cbOut{to{opacity:0; transform:translate(-50%,-62%) scale(.9)}}
-@keyframes cbSpin{0%{transform:rotate(-18deg) scale(.8)} 40%{transform:rotate(10deg) scale(1.08)} 100%{transform:rotate(0) scale(1)}}
-@media (prefers-reduced-motion:reduce){ #celebrate .cf{display:none} #celebrate .cbadge svg{animation:none} }
-@media print{#celebrate{display:none !important}}
+/* Homework: Class / Subject / Teacher in one row (date is automatic = today) */
+#tab-homework .hw-grid{grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+#tab-homework #hw-otherWrap{order:9}
+#tab-homework .hw-grid .hw-lab{font-size:12px; margin-bottom:4px; white-space:nowrap}
+#tab-homework .hw-grid select,#tab-homework .hw-grid input[type="text"]{width:100%; min-width:0; font-size:13px; padding-left:10px; padding-right:24px; text-overflow:ellipsis}
+#tab-homework .hw-grid input[type="text"]{padding-right:10px}
+/* Fee Receipt: Date + Receipt No. + Class in one row; Month + Arrears in one row */
+.fr-row3{display:grid; grid-template-columns:1.25fr 1fr .8fr; gap:8px}
+.fr-row3 .field,.fr-row2 .field{min-width:0}
+.fr-row3 input{width:100%; min-width:0; font-size:13px; padding-left:10px; padding-right:8px}
+.fr-row2{display:flex; gap:10px; margin-top:10px}
+.fr-row2 .field{flex:1 1 0}
+.fr-row2 input{width:100%; min-width:0}
+/* ===== Flat top bar: no hero. PPHS left (dark blue), social + video + theme buttons right ===== */
+html body header.profile,html body header.profile[data-tod],html[data-theme] body header.profile,html[data-theme] body header.profile[data-tod]{
+  display:flex !important; flex-direction:row; align-items:center; justify-content:flex-start; gap:10px; text-align:left;
+  background:none !important; border:0 !important; box-shadow:none !important; border-radius:0 !important;
+  padding:8px 2px 10px !important; margin-bottom:10px !important; min-height:0 !important; height:auto !important; overflow:visible !important}
+html body header.profile::before,html body header.profile::after{display:none !important}
+html body header.profile .hd-sky,html body header.profile .hd-plants,html body header.profile .hd-grass-front,html body header.profile > svg:not(.ico){display:none !important}
+html body header.profile .profile-name{order:-1; flex:1; min-width:0; justify-content:flex-start; text-align:left; font-family:'Inter',Arial,sans-serif; font-size:34px; font-weight:800; letter-spacing:-.6px; color:#14306b !important; text-shadow:none !important; filter:none}
+html body header.profile .hdsocial{position:relative; top:auto; left:auto; flex:none; width:38px; height:38px; order:1}
+html body header.profile .hdsocial .soc{box-shadow:0 2px 8px rgba(20,48,107,.22)}
+html body header.profile .videobtn{position:relative; top:auto; right:auto; flex:none; display:inline-flex; order:2; color:#14306b; background:#eef1f8; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none}
+html body header.profile .themebtn{position:relative; top:auto; right:auto; flex:none; order:3; color:#14306b; background:#eef1f8; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none}
+html[data-theme="black"] body header.profile .profile-name{color:#fff !important}
+html[data-theme="black"] body header.profile .videobtn,html[data-theme="black"] body header.profile .themebtn{color:#fff; background:rgba(255,255,255,.12)}
+/* ===== Gear (settings) popup: social + videos + theme live inside ===== */
+html body header.profile{z-index:80}
+html body header.profile .gearbtn{flex:none; order:5; width:44px; height:44px; border-radius:50%; border:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:#14306b; background:#eef1f8; transition:transform .35s cubic-bezier(.2,.9,.3,1.2), background .2s}
+html body header.profile .gearbtn:active{transform:scale(.92)}
+html body header.profile .gearbtn[aria-expanded="true"]{transform:rotate(70deg); background:#dfe5f5}
+html body header.profile .gear-panel{position:absolute; top:calc(100% - 4px); right:0; left:auto; z-index:300; width:min(300px,92vw); background:#fff; color:#14306b; border-radius:22px; padding:10px 10px 8px;
+  box-shadow:0 18px 44px rgba(20,48,107,.30), 0 0 0 1px rgba(20,48,107,.08); transform-origin:100% 0; animation:gearPop .24s cubic-bezier(.2,.9,.3,1.2)}
+html body header.profile .gear-panel[hidden]{display:none}
+@keyframes gearPop{from{opacity:0; transform:translateY(-10px) scale(.9)}to{opacity:1; transform:none}}
+html body header.profile .gp-title{font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:#6a74a6; padding:4px 8px 6px}
+html body header.profile .gp-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 8px}
+html body header.profile .gp-row + .gp-row{border-top:1px solid #eef1f8}
+html body header.profile .gp-lab{font-size:15px; font-weight:600}
+html body header.profile .gear-panel .hdsocial{position:static; order:0; width:auto; height:auto; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px}
+html body header.profile .gear-panel .hdsocial .soc{position:relative; inset:auto; width:38px; height:38px; flex:none; opacity:1 !important; transform:none !important; visibility:visible !important; pointer-events:auto !important; box-shadow:0 0 0 1px #e3e8f5}
+html body header.profile .gear-panel .videobtn,html body header.profile .gear-panel .themebtn{order:0; width:38px; height:38px; flex:none}
+html[data-theme="black"] body header.profile .gearbtn{color:#fff; background:rgba(255,255,255,.12)}
+html[data-theme="black"] body header.profile .gear-panel{background:#17181d; color:#f1f1f4; box-shadow:0 18px 44px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.1)}
+html[data-theme="black"] body header.profile .gp-row + .gp-row{border-top-color:rgba(255,255,255,.1)}
+html[data-theme="black"] body header.profile .gp-title{color:#9aa0ad}
+@media print{.gearbtn,.gear-panel{display:none !important}}
+/* gear: no blue tap box on touch */
+html body header.profile .gearbtn,html body header.profile .gear-panel,html body header.profile .gear-panel *{-webkit-tap-highlight-color:transparent; -webkit-touch-callout:none}
+html body header.profile .gearbtn{outline:none; user-select:none; -webkit-user-select:none; -webkit-appearance:none; appearance:none}
+html body header.profile .gearbtn:focus,html body header.profile .gearbtn:focus-visible,html body header.profile .gearbtn:active{outline:none; box-shadow:none}
+html body header.profile .gearbtn::-moz-focus-inner{border:0}
+/* ===== Polish: touch, motion, offline pill ===== */
+*{-webkit-tap-highlight-color:transparent}
+button,a,input,select,textarea,label,summary{touch-action:manipulation}
+button,.tile,.tab-btn,.backbtn{-webkit-user-select:none; user-select:none}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+html.bg-paused *,html.bg-paused *::before,html.bg-paused *::after{animation-play-state:paused !important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}}
+#netPill{display:none; position:fixed; left:50%; top:calc(8px + env(safe-area-inset-top,0px)); transform:translateX(-50%); z-index:9998; max-width:calc(100% - 24px); padding:8px 14px; border-radius:999px;
+  background:#263238; color:#fff; font:600 12.5px/1.3 'Inter',Arial,sans-serif; text-align:center; box-shadow:0 6px 18px rgba(0,0,0,.28); pointer-events:none}
+html.is-offline #netPill{display:block}
+@media print{#netPill{display:none !important}}
+/* ===== Grid with a diagonal light beam that lights up the lines as it sweeps across ===== */
+.grid-fx{--gf-size:34px; --gf-faint:rgba(40,90,200,.09); --gf-bright:rgba(30,100,255,.50);
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.grid-fx .gf-base{position:absolute; inset:0}
+.grid-fx .gf-faint{position:absolute; inset:0; background-image:linear-gradient(90deg,var(--gf-faint) 1px,transparent 1px),linear-gradient(0deg,var(--gf-faint) 1px,transparent 1px); background-size:var(--gf-size) var(--gf-size)}
+.grid-fx .gf-beam{position:absolute; top:0; bottom:0; left:-100%; width:300%;
+  -webkit-mask-image:linear-gradient(112deg,transparent 38%,#000 50%,transparent 62%); mask-image:linear-gradient(112deg,transparent 38%,#000 50%,transparent 62%);
+  will-change:transform; animation:gfBeamA 6.5s ease-in-out infinite}
+.grid-fx .gf-bright{position:absolute; top:0; bottom:0; left:33.3333%; width:33.3333%;
+  background-image:linear-gradient(90deg,var(--gf-bright) 1.5px,transparent 1.5px),linear-gradient(0deg,var(--gf-bright) 1.5px,transparent 1.5px); background-size:var(--gf-size) var(--gf-size);
+  will-change:transform; animation:gfBeamB 6.5s ease-in-out infinite}
+/* the beam moves one way, the bright grid moves the opposite way, so the grid itself stays still and only the light travels */
+@keyframes gfBeamA{from{transform:translate3d(-33.3333%,0,0)}to{transform:translate3d(33.3333%,0,0)}}
+@keyframes gfBeamB{from{transform:translate3d(100%,0,0)}to{transform:translate3d(-100%,0,0)}}
+html[data-theme="black"] .grid-fx{--gf-faint:rgba(50,110,230,.16); --gf-bright:rgba(70,150,255,.95)}
+html[data-theme="black"] .grid-fx .gf-base{background:radial-gradient(90% 60% at 0% 20%,rgba(10,50,140,.55),transparent 70%),linear-gradient(160deg,#021235 0%,#000714 55%,#000a1f 100%)}
+html[data-theme="gold"] .grid-fx{--gf-faint:rgba(190,130,20,.10); --gf-bright:rgba(190,130,20,.60)}
+@media print{.grid-fx{display:none !important}}
+/* ===== Inside a section: no PPHS / gear on top; Home button floats at bottom-left (thumb friendly) ===== */
+html body.view-section header.profile,html[data-theme] body.view-section header.profile,html body.view-section header.profile[data-tod],html[data-theme] body.view-section header.profile[data-tod]{display:none !important}
+html body.view-section .backbar{position:fixed; left:14px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); top:auto; z-index:90; padding:0; margin:0}
+html body.view-section .backbtn{padding:11px 18px 11px 12px; font-size:15px; box-shadow:0 10px 24px rgba(16,40,60,.28), 0 0 0 1px rgba(16,40,60,.06)}
+html body.view-section{padding-bottom:96px !important}
+@media (max-height:460px){html body.view-section .backbar{display:none}}
+/* Home button: icon only, small round */
+html body.view-section .backbtn{width:48px; height:48px; padding:0 !important; border-radius:50%; justify-content:center; gap:0}
+html body.view-section .backbtn svg{width:24px; height:24px}
+html body.view-section .backbar{left:12px; bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+html body.view-section{padding-bottom:78px !important}
 </style>
 </head>
 <body class="view-home splash-on">
+<div id="netPill" role="status" aria-live="polite">Offline — internet nahi hai, saved data chal raha hai</div>
+<div class="grid-fx" aria-hidden="true"><div class="gf-base"></div><div class="gf-faint"></div><div class="gf-beam"><div class="gf-bright"></div></div></div>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="b-whatsapp" viewBox="0 0 24 24">
   <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -1972,14 +2033,25 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
 <div class="container">
 
   <header class="profile" data-tod="morning">
-    <div class="hdsocial" id="hdSocial" aria-label="School social links"></div>
-    
-    <button id="themeBtn" class="themebtn" type="button" aria-label="Change theme" title="Change theme">
-      <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor"/><circle cx="10.5" cy="7" r="1.1" fill="currentColor"/><circle cx="15" cy="7.5" r="1.1" fill="currentColor"/></svg>
-      <span class="themelbl" id="themeLbl" hidden>Default</span></button>
-    <a id="videoBtn" class="videobtn" href="https://drive.google.com/drive/folders/1sn-npkduu_npd3WMWxXyCsqlDZ3miHif" target="_blank" rel="noopener noreferrer" aria-label="Videos (Google Drive)" title="Videos (Google Drive)">
+    <button id="gearBtn" class="gearbtn" type="button" aria-label="Settings" aria-haspopup="true" aria-expanded="false" aria-controls="gearPanel" title="Settings">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15z"/></svg>
+    </button>
+    <div id="gearPanel" class="gear-panel" role="menu" hidden>
+      <div class="gp-title">Options</div>
+      <div class="gp-row"><span class="gp-lab">Follow us</span>
+        <div class="hdsocial" id="hdSocial" aria-label="School social links"></div>
+      </div>
+      <div class="gp-row"><span class="gp-lab">Videos (Drive)</span>
+        <a id="videoBtn" class="videobtn" href="https://drive.google.com/drive/folders/1sn-npkduu_npd3WMWxXyCsqlDZ3miHif" target="_blank" rel="noopener noreferrer" aria-label="Videos (Google Drive)" title="Videos (Google Drive)">
       <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2.5"/><path d="M16 10l6-3.5v11L16 14z"/></svg>
     </a>
+      </div>
+      <div class="gp-row"><span class="gp-lab">Change theme</span>
+        <button id="themeBtn" class="themebtn" type="button" aria-label="Change theme" title="Change theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor"/><circle cx="10.5" cy="7" r="1.1" fill="currentColor"/><circle cx="15" cy="7.5" r="1.1" fill="currentColor"/></svg>
+      <span class="themelbl" id="themeLbl" hidden>Default</span></button>
+      </div>
+    </div>
     <div class="hd-sky" aria-hidden="true">
   <span class="hd-night">
   </span>
@@ -4117,7 +4189,7 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
   </nav>
 
 
-  <div class="backbar"><button class="backbtn" type="button" onclick="goHome()"><span>‹</span> Home</button></div>
+  <div class="backbar"><button class="backbtn" type="button" onclick="goHome()" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9.5h5v-5.5h3v5.5h5V10"/></svg></button></div>
 
   <!-- ================= ATTENDANCE TAB ================= -->
   <section id="tab-attendance" class="tab-panel">
@@ -4209,14 +4281,12 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
 
     <div class="card no-print">
       <div class="section-title">Student Details</div>
-      <div class="actions-row">
+      <div class="fr-row3">
         <div class="field"><span class="lbl">Date</span><input type="date" id="fr-date"></div>
-        <div class="field"><span class="lbl">Receipt No.</span><input id="fr-receiptNo" placeholder="Optional — for your own records"></div>
+        <div class="field"><span class="lbl">Receipt No.</span><input id="fr-receiptNo" inputmode="text" placeholder="Optional"></div>
+        <div class="field"><span class="lbl">Class</span><input id="fr-studentClass" inputmode="text" placeholder="e.g. 6-B"></div>
       </div>
-      <div class="actions-row">
-        <div class="field"><span class="lbl">Student name</span><input id="fr-studentName" placeholder="e.g. Ayesha Khan"></div>
-        <div class="field"><span class="lbl">Class</span><input id="fr-studentClass" placeholder="e.g. 6-B"></div>
-      </div>
+      <div class="field" style="margin-top:10px"><span class="lbl">Student name</span><input id="fr-studentName" placeholder="e.g. Ayesha Khan"></div>
     </div>
 
     <div class="card no-print">
@@ -4229,34 +4299,35 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
         <div class="fee-dropdown-panel">
           <div class="check-row" id="fr-row-monthly">
             <label><input type="checkbox" id="fr-chk-monthly"> Monthly Fee</label>
-            <input class="amt" type="number" placeholder="Rs." id="fr-amt-monthly">
+            <input class="amt" type="number" inputmode="numeric" placeholder="Rs." id="fr-amt-monthly">
           </div>
           <div class="check-row" id="fr-row-admission">
             <label><input type="checkbox" id="fr-chk-admission"> Admission Fee</label>
-            <input class="amt" type="number" placeholder="Rs." id="fr-amt-admission">
+            <input class="amt" type="number" inputmode="numeric" placeholder="Rs." id="fr-amt-admission">
           </div>
           <div class="check-row" id="fr-row-promotion">
             <label><input type="checkbox" id="fr-chk-promotion"> Promotion Fee</label>
-            <input class="amt" type="number" placeholder="Rs." id="fr-amt-promotion">
+            <input class="amt" type="number" inputmode="numeric" placeholder="Rs." id="fr-amt-promotion">
           </div>
           <div class="check-row" id="fr-row-exam">
             <label><input type="checkbox" id="fr-chk-exam"> Exam Fee</label>
-            <input class="amt" type="number" placeholder="Rs." id="fr-amt-exam">
+            <input class="amt" type="number" inputmode="numeric" placeholder="Rs." id="fr-amt-exam">
           </div>
         </div>
       </div>
-      <div class="field" id="fr-periodField" style="margin-top:10px; display:none;">
-        <span class="lbl">Month</span><input id="fr-period" placeholder="e.g. August 2026">
+      <div class="fr-row2">
+        <div class="field" id="fr-periodField" style="display:none;">
+          <span class="lbl">Month</span><input id="fr-period" inputmode="text" placeholder="e.g. August 2026">
+        </div>
+        <div class="field"><span class="lbl">Arrears (بقایا جات)</span><input type="number" inputmode="numeric" placeholder="0" id="fr-arrears"></div>
       </div>
-
-      <div class="field"><span class="lbl">Arrears (بقایا جات)</span><input type="number" placeholder="0" id="fr-arrears"></div>
 
       <div class="total-box"><span>Total</span><span class="amount" id="fr-formTotal">Rs. 0</span></div>
     </div>
 
     <div class="card no-print">
       <div class="section-title">Contact</div>
-      <div class="field"><span class="lbl">Guardian WhatsApp number</span><input id="fr-guardianPhone" placeholder="03xx-xxxxxxx"></div>
+      <div class="field"><span class="lbl">Guardian WhatsApp number</span><input id="fr-guardianPhone" type="tel" inputmode="tel" autocomplete="off" placeholder="03xx-xxxxxxx"></div>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:18px;">
         <button class="btn btn-wa" id="fr-btnWhatsapp">WhatsApp</button>
@@ -4265,7 +4336,7 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
       <div class="hint">WhatsApp opens with the receipt pre-filled — you just hit send. No internet? Use SMS — it sends over the SIM card's normal signal.</div>
     </div>
 
-    <div class="card no-print">
+    <div class="card no-print" hidden style="display:none !important">
       <div class="section-title">Income Records</div>
       <div class="total-box"><span>Saved receipts</span><span class="amount" id="fr-recordCount">0</span></div>
       <div class="total-box"><span>Total income (excl. arrears)</span><span class="amount" id="fr-recordTotal">Rs. 0</span></div>
@@ -4338,7 +4409,7 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
       <div class="section-title">Student Details</div>
       <div class="actions-row">
         <div class="field"><span class="lbl">Student Name</span><input id="fm-student" type="text" autocomplete="off" placeholder="Enter student name"></div>
-        <div class="field"><span class="lbl">Class</span><input id="fm-className" type="text" autocomplete="off" placeholder="Enter class"></div>
+        <div class="field"><span class="lbl">Class</span><input id="fm-className" type="text" inputmode="text" autocomplete="off" placeholder="Enter class"></div>
       </div>
     </div>
 
@@ -4393,7 +4464,7 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
           <p class="hw-sub">Daily homework &amp; material report</p>
         </div>
       </div>
-      <div class="hw-hero-meta">
+      <div class="hw-hero-meta" hidden style="display:none !important">
         <span class="hw-pill" id="hw-greet"><svg class="ico" aria-hidden="true"><use href="#i-hand"/></svg><span>Hello</span></span>
         <span class="hw-pill" id="hw-datepill"><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg><span>—</span></span>
         <span class="hw-pill" id="hw-clock"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span>—</span></span>
@@ -4451,14 +4522,11 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
         </div>
 
         <div>
-          <label class="hw-lab" for="hw-teacher">Teacher name</label>
-          <input type="text" id="hw-teacher" placeholder="Teacher name" autocomplete="name">
+          <label class="hw-lab" for="hw-teacher">Teacher</label>
+          <input type="text" id="hw-teacher" placeholder="Teacher" autocomplete="name">
         </div>
 
-        <div>
-          <label class="hw-lab" for="hw-date">Date</label>
-          <input type="date" id="hw-date">
-        </div>
+        <input type="hidden" id="hw-date">
       </div>
     </section>
 
@@ -4511,7 +4579,7 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
       <div class="section-title">Parents Information</div>
       <div class="actions-row">
         <div class="field"><span class="lbl">Father Name</span><input type="text" id="ad-father" placeholder="Father's name"></div>
-        <div class="field"><span class="lbl">Contact</span><input type="tel" id="ad-contact" placeholder="Contact number"></div>
+        <div class="field"><span class="lbl">Contact</span><input type="tel" id="ad-contact" inputmode="tel" autocomplete="off" placeholder="Contact number"></div>
       </div>
     </div>
 
@@ -4519,8 +4587,8 @@ html[data-theme="gold"] header.profile .hd-sky{inset:2px; border-radius:26px; ba
       <div class="section-title">Previous Academic Records</div>
       <div class="adm-row3">
         <div><p class="lbl-sm">School Name</p><input type="text" id="ad-school1" placeholder="e.g. ABC Public School"></div>
-        <div><p class="lbl-sm">Class</p><input type="text" id="ad-class1" placeholder="e.g. 5th"></div>
-        <div><p class="lbl-sm">Year</p><input type="text" id="ad-year1" placeholder="e.g. 2025"></div>
+        <div><p class="lbl-sm">Class</p><input type="text" id="ad-class1" inputmode="text" placeholder="e.g. 5th"></div>
+        <div><p class="lbl-sm">Year</p><input type="text" id="ad-year1" inputmode="numeric" maxlength="4" placeholder="e.g. 2025"></div>
       </div>
     </div>
 
@@ -4866,9 +4934,7 @@ function showSection(name){
   }
 }
 function showHome(){
-  /* leaving a fee section locks it again */
-  feeUnlocked = false;
-  try{ sessionStorage.removeItem("pps_fee_unlocked"); }catch(e){}
+  /* password stays unlocked for this visit: returning to Fee Receipt / Reminder opens directly */
   document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".tile").forEach(b=>b.classList.remove("active"));
   document.body.classList.remove("view-section");
@@ -5148,9 +5214,7 @@ buildGlitchTitle("registerTitle","REGISTER MANAGEMENT");
     const msg=makeMessage();
     const phone=normalizePhone(number);
     const url="https://wa.me/"+phone+"?text="+encodeURIComponent(msg);
-    if(window.celebrateGoodJob) window.celebrateGoodJob("Thank You!");   /* sign first */
-    if(window.openWhatsAppAfterDelay) window.openWhatsAppAfterDelay(url, APP_CONFIG.whatsappDelayMs);   /* delay: see SETTINGS */
-    else window.open(url,"_blank");
+    window.open(url,"_blank");
   }
 
   addStudent("absent");
@@ -5748,6 +5812,8 @@ showHome();
       subjSel = $("hw-subject"), otherWrap = $("hw-otherWrap"), otherInput = $("hw-other"),
       teacherInput = $("hw-teacher");
   var count = 0;
+  try{ var _savedT = localStorage.getItem("pphs-hw-teacher"); if(_savedT && !teacherInput.value) teacherInput.value = _savedT; }catch(e){}
+  teacherInput.addEventListener("input", function(){ try{ localStorage.setItem("pphs-hw-teacher", teacherInput.value.trim()); }catch(e){} });
 
   function todayLocal(){
     var d = new Date();
@@ -5788,7 +5854,9 @@ showHome();
     return (row.querySelector(".book").checked ? 1 : 0) +
            (row.querySelector(".notebook").checked ? 1 : 0) +
            (row.querySelector(".incomplete").checked ? 1 : 0) +
-           (row.querySelector(".homework").checked ? 1 : 0);
+           (row.querySelector(".homework").checked ? 1 : 0) +
+           (row.querySelector(".diary").checked ? 1 : 0) +
+           (row.querySelector(".classwork").checked ? 1 : 0);
   }
   function refreshRow(row){
     row.querySelectorAll(".hw-chip").forEach(function(c){
@@ -5827,6 +5895,8 @@ showHome();
         '<label class="hw-chip"><input type="checkbox" class="notebook"><span class="ic">' + ico("notebook") + '</span><span>Note Book</span></label>' +
         '<label class="hw-chip"><input type="checkbox" class="incomplete"><span class="ic">' + ico("ban") + '</span><span>Incomplete N.Book</span></label>' +
         '<label class="hw-chip"><input type="checkbox" class="homework"><span class="ic">' + ico("edit") + '</span><span>HomeWork Not Done.</span></label>' +
+        '<label class="hw-chip"><input type="checkbox" class="diary"><span class="ic">' + ico("calendar") + '</span><span>Diary</span></label>' +
+        '<label class="hw-chip"><input type="checkbox" class="classwork"><span class="ic">' + ico("pencil") + '</span><span>Classwork</span></label>' +
       '</div>';
 
     row.addEventListener("change", function(e){
@@ -5876,12 +5946,16 @@ showHome();
       if(!name) return;
       valid++;
       var book = row.querySelector(".book").checked, notebook = row.querySelector(".notebook").checked,
-          incomplete = row.querySelector(".incomplete").checked, homework = row.querySelector(".homework").checked;
+          incomplete = row.querySelector(".incomplete").checked, homework = row.querySelector(".homework").checked,
+          diary = row.querySelector(".diary").checked,
+          classwork = row.querySelector(".classwork").checked;
       var issues = [];
       if(book) issues.push("بُک نہیں ہے۔");
       if(notebook) issues.push("کاپی نہیں ہے۔");
       if(incomplete) issues.push("کاپی نامکمل ہے۔");
       if(homework) issues.push("ہوم ورک نہیں کیا ہے۔");
+      if(diary) issues.push("ڈائری نہیں ہے۔");
+      if(classwork) issues.push("کلاس ورک نہیں کیا ہے۔");
       if(issues.length > 0) report += valid + ". *" + name + "* — " + issues.join(", ") + "\n";
     });
 
@@ -5893,10 +5967,7 @@ showHome();
     if(PRINCIPAL_WHATSAPP_NUMBER.indexOf("X") !== -1){ toast("Set the Principal Sahib's WhatsApp number in the code first."); return; }
 
     report += "\n*Total Reported Students:* " + valid;
-    if(window.celebrateGoodJob) window.celebrateGoodJob();   /* "Good Job!" sign */
-    var principalUrl = "https://wa.me/" + PRINCIPAL_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(report);
-    if(window.openWhatsAppAfterDelay) window.openWhatsAppAfterDelay(principalUrl, APP_CONFIG.whatsappDelayMs);   /* delay: see SETTINGS */
-    else window.open(principalUrl, "_blank");
+    window.open("https://wa.me/" + PRINCIPAL_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(report), "_blank");
   }
 
   /* floating school doodles (only visible on the Homework page) */
@@ -6785,7 +6856,7 @@ showHome();
         }
         var s = x.s, ok = passed(s.marks), aw = away(s);
         var done = aw || (s.marks && s.marks > 0);
-        var rollCell = '<td class="roll"><input type="number" class="roll-input" data-roll="'+s.roll+'" value="'+s.roll+'" min="1" step="1"></td>';
+        var rollCell = '<td class="roll"><input type="number" inputmode="numeric" class="roll-input" data-roll="'+s.roll+'" value="'+s.roll+'" min="1" step="1"></td>';
         var nameCell = '<td class="name"><input type="text" class="name-input" data-roll="'+s.roll+'" value="'+esc(s.name)+'" placeholder="Name" style="width:100%"></td>';
         var fatherCell = '<td class="name"><input type="text" class="father-input" data-roll="'+s.roll+'" value="'+esc(s.fatherName||"")+'" placeholder="Father name" style="width:100%"></td>';
         var marksCell = aw
@@ -7620,60 +7691,25 @@ document.addEventListener('click', function(e){
   document.querySelectorAll('[data-cfg="footerText"]').forEach(function(el){ el.textContent = cfg.footerText; });
 })();
 </script>
+<script>(function(){var h=document.querySelector("header.profile");if(!h)return;function t(){var d=new Date(),m=d.getHours()+d.getMinutes()/60;h.setAttribute("data-tod",(m>=16||m<6)?"night":(m>=10?"day":"morning"))}t();setInterval(t,60000)})();</script>
 <script>
-/* ==========================================================================
-   CELEBRATION: shows a "Good Job!" / "Thank You!" sign with confetti (no background)
-   after a report is sent to the Principal or attendance is sent. Plays once per click.
-   ========================================================================== */
+/* gear popup: open / close */
 (function(){
-  var COLORS = ["#ff8a2a","#ffd23f","#25d366","#1877f2","#ff4d6d","#b57bff","#26c6da"];
-  var MEDAL = '<svg viewBox="0 0 120 120" aria-hidden="true">'
-    + '<path d="M38 6h16l10 30H44z" fill="#e53935"/><path d="M82 6H66L56 36h20z" fill="#1e88e5"/>'
-    + '<circle cx="60" cy="72" r="38" fill="#ffc21a"/><circle cx="60" cy="72" r="31" fill="#ffdc5e"/><circle cx="60" cy="72" r="31" fill="none" stroke="#e39a00" stroke-width="3"/>'
-    + '<path d="M60 49l7.2 14.6 16.1 2.3-11.7 11.4 2.8 16-14.4-7.6-14.4 7.6 2.8-16-11.7-11.4 16.1-2.3z" fill="#ff8a1a" stroke="#e36a00" stroke-width="2" stroke-linejoin="round"/></svg>';
-  var timer = null, lastText = "Good Job!", waPending = false;
-
-  function show(text){
-    var old = document.getElementById("celebrate"); if(old) old.remove();
-    clearTimeout(timer);
-    var box = document.createElement("div");
-    box.id = "celebrate"; box.setAttribute("aria-hidden","true");
-    var h = "";
-    for(var i = 0; i < 56; i++){
-      var ang = Math.random() * Math.PI * 2, dist = 90 + Math.random() * 190;
-      var x = Math.cos(ang) * dist, y = Math.sin(ang) * dist * .8 + 70 + Math.random() * 120;
-      h += '<i class="cf" style="--c:' + COLORS[i % COLORS.length] + ';--x:' + x.toFixed(0) + 'px;--y:' + y.toFixed(0) + 'px;--r:' + ((Math.random() * 900 - 450) | 0) + 'deg;'
-        + '--w:' + (6 + Math.random() * 6).toFixed(0) + 'px;--h:' + (9 + Math.random() * 9).toFixed(0) + 'px;--d:' + (1.5 + Math.random() * 1).toFixed(2) + 's;--dl:' + (Math.random() * .25).toFixed(2) + 's"></i>';
-    }
-    box.innerHTML = h + '<div class="cbadge">' + MEDAL + '<b>' + (text || lastText) + '</b></div>';
-    document.body.appendChild(box);
-    timer = setTimeout(function(){ box.remove(); }, 3300);
-  }
-
-  window.celebrateGoodJob = function(text){ lastText = text || "Good Job!"; show(lastText); };
-
-  /* Opens WhatsApp (delay comes from SETTINGS: whatsappDelayMs, 0 = at once).
-     If the browser blocks the new tab, it opens in the same tab instead. */
-  window.openWhatsAppAfterDelay = function(url, ms){
-    ms = Number(ms) || 0;
-    if(ms <= 0){                       /* open at once, inside the click (never blocked) */
-      var w0 = null;
-      try{ w0 = window.open(url, "_blank"); }catch(e){}
-      if(!w0) window.location.href = url;
-      return;
-    }
-    if(waPending) return;
-    waPending = true;
-    setTimeout(function(){
-      waPending = false;
-      var w = null;
-      try{ w = window.open(url, "_blank"); }catch(e){}
-      if(!w) window.location.href = url;
-    }, ms);
-  };
-
+  var b=document.getElementById("gearBtn"), p=document.getElementById("gearPanel");
+  if(!b||!p) return;
+  function set(open){ p.hidden=!open; b.setAttribute("aria-expanded", open?"true":"false"); }
+  b.addEventListener("click",function(e){ e.stopPropagation(); set(p.hidden); });
+  document.addEventListener("click",function(e){ if(!p.hidden && !p.contains(e.target)) set(false); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") set(false); });
+  var v=document.getElementById("videoBtn"); if(v) v.addEventListener("click",function(){ setTimeout(function(){ set(false); },150); });
 })();
 </script>
-<script>(function(){var h=document.querySelector("header.profile");if(!h)return;function t(){var d=new Date(),m=d.getHours()+d.getMinutes()/60;h.setAttribute("data-tod",(m>=16||m<6)?"night":(m>=10?"day":"morning"))}t();setInterval(t,60000)})();</script>
+<script>
+/* pause animations while the app is in the background (saves battery, keeps it smooth) */
+(function(){
+  function f(){ document.documentElement.classList.toggle("bg-paused", document.hidden); }
+  document.addEventListener("visibilitychange", f); f();
+})();
+</script>
 </body>
 </html>
