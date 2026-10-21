@@ -4764,7 +4764,7 @@ html body.view-section{padding-bottom:78px !important}
       <h2>Date &amp; Class</h2>
       <div class="field">
         <label for="hd-school">School name (shown as "NAME DIARY" on the picture)</label>
-        <input type="text" id="hd-school" placeholder="Punjkora Public High School">
+        <input type="text" id="hd-school" placeholder="PPHS">
       </div>
       <div class="grid2">
         <div class="field">
@@ -4824,7 +4824,7 @@ html body.view-section{padding-bottom:78px !important}
     <h2><span class="step">Test details</span></h2>
     <div class="grid two">
       <!-- Row 1 -->
-      <div><label for="school">School name</label><input id="school" placeholder="e.g. Punjkora Public High School" autocomplete="off"></div>
+      <div><label for="school">School name</label><input id="school" placeholder="e.g. Al Noor School" autocomplete="off"></div>
       <div><label for="exam">Test name</label><input id="exam" placeholder="e.g. Monthly Test" autocomplete="off"></div>
       <!-- Row 2 -->
       <div><label for="cls">Class</label><select id="cls"></select></div>
@@ -7898,7 +7898,7 @@ function themeFor(cls){
   return THEME_GREEN;
 }
 
-const DEFAULT_SCHOOL = 'Punjkora Public High School';
+const DEFAULT_SCHOOL = 'PPHS';
 
 let db = JSON.parse(localStorage.getItem('hwdiary') || 'null') || { entries: {} };
 db.entries = db.entries || {};
@@ -8081,7 +8081,7 @@ function fitFont(ctx, text, maxSize, minSize, maxWidth, family){
 
 function buildCanvas(){
   const cls = H('cls').value, dateTxt = fmtDate();
-  const title = ((H('school').value.trim() || DEFAULT_SCHOOL) + ' DIARY').toUpperCase();
+  const title = 'PUNJKORA PUBLIC HIGH SCHOOL DIARY';
   const theme = themeFor(cls);
   const c = document.createElement('canvas');
   c.width = W;
