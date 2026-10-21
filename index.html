@@ -44,7 +44,7 @@ const APP_CONFIG = {
   social: {
     showSeconds: 3,
     whatsapp: "03400968477",
-    facebook: "https://www.facebook.com/share/1EmbNPhTPw/",
+    facebook: "https://www.facebook.com/share/16Q3RsPX2Zx/",
     tiktok:   "https://www.tiktok.com/@ppsbalambat?_r=1&_t=ZN-9AEX3UTUQHm"
   },
 
@@ -104,8 +104,8 @@ const APP_CONFIG = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Roboto+Slab:wght@800;900&family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=PT+Serif:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Roboto+Slab:wght@800;900&family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=PT+Serif:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Roboto+Slab:wght@800;900&family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=PT+Serif:wght@400;700&family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Roboto+Slab:wght@800;900&family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=PT+Serif:wght@400;700&family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
 <style>
 
 :root{
@@ -1320,6 +1320,10 @@ body.view-hw .hw-bg{display:block}
 #tab-homework{padding-bottom:24px}
 .hw-sendbar{position:static; left:auto; right:auto; bottom:auto; z-index:auto; padding:0; background:none; pointer-events:auto; margin-top:2px}
 .hw-sendbar-inner{width:100%}
+#tab-homework .hw-sendbar{margin-top:12px}
+#tab-homework .hw-sendbar-inner{padding:0; background:none; box-shadow:none; border-radius:0}
+#tab-homework .hw-tally{display:none}
+#tab-homework .hw-send{width:100%; flex:1 1 100%}
 
 /* ---- One title font across the app (the Homework title font, Baloo 2) ---- */
 h1,h2,h3,.panel-title,.profile-name,.section-title,.tile-txt b,.splash-title,.att-lock-title,
@@ -1713,6 +1717,55 @@ body.reg-typing{padding-bottom:55vh}
 #tab-register .pics{display:flex; gap:10px; margin:0 0 12px}
 #tab-register .pics .rbtn{flex:1; border:0; border-radius:999px; padding:13px 10px; font-size:.78rem; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--r-v1),var(--r-v2)); box-shadow:0 8px 16px rgba(242,106,27,.28)}
 #tab-register .pics .rbtn:hover{border:0}
+
+body.kb-open{padding-bottom:55vh}
+/* ---------- HOMEWORK DIARY (merged from homework-diary.html, scoped to #tab-hwdiary) ---------- */
+.tile-hwdiary{background:var(--orange)}
+.tile-hwdiary .tile-ico{color:#ff741b}
+.tile-hwdiary.active{box-shadow:0 0 0 3px #fff, 0 0 0 6px rgba(255,138,42,.6), var(--tile-shadow)}
+body.revealed:not(.intro-done) .tile:nth-child(8){animation:riseIn .8s cubic-bezier(.2,.8,.2,1) 1.34s backwards}
+body.view-hwdiary{padding-left:6px; padding-right:6px}
+@media(max-width:430px){ body.view-hwdiary{padding-left:4px; padding-right:4px} }
+#tab-hwdiary{--h-v1:#ff8a2a; --h-v2:#f26a1b; --h-soft:#ffe9d6; --h-field:#f4f5f8; --h-line:#e2e5ec; --h-muted:#6b7683; --h-red:#c0392b}
+#tab-hwdiary .card{padding:18px 12px; margin-bottom:10px; border-radius:26px}
+#tab-hwdiary .card h2{display:inline-block; max-width:100%; margin:0 0 12px; font-size:.82rem; font-weight:800; color:#fff; text-transform:none; letter-spacing:0;
+  background:linear-gradient(135deg,var(--h-v1),var(--h-v2)); padding:10px 18px; border-radius:999px; box-shadow:0 8px 16px rgba(242,106,27,.28)}
+#tab-hwdiary label{display:block; margin:0 0 5px 3px; text-transform:none; letter-spacing:normal; opacity:1; font-size:.78rem; font-weight:700; color:var(--h-muted)}
+#tab-hwdiary .field{margin-bottom:10px}
+#tab-hwdiary .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+#tab-hwdiary input[type=text],#tab-hwdiary input[type=date],#tab-hwdiary select,#tab-hwdiary textarea{
+  width:100%; min-width:0; padding:11px 14px; border:1.5px solid var(--h-line); border-radius:14px; font-size:16px; font-weight:700;
+  color:var(--ink); background:var(--h-field); font-family:inherit; box-shadow:none; outline:none; text-align:start}
+#tab-hwdiary input:focus,#tab-hwdiary select:focus,#tab-hwdiary textarea:focus{border-color:var(--h-v1); box-shadow:0 0 0 3px var(--h-soft); background:#fff}
+#tab-hwdiary input::placeholder,#tab-hwdiary textarea::placeholder{color:#a3abb6; font-weight:600}
+#tab-hwdiary select{appearance:none; -webkit-appearance:none; padding-right:30px;
+  background-image:linear-gradient(45deg,transparent 50%,var(--h-v2) 50%),linear-gradient(135deg,var(--h-v2) 50%,transparent 50%);
+  background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%; background-size:5px 5px; background-repeat:no-repeat}
+#tab-hwdiary textarea{min-height:110px; resize:vertical; line-height:1.45}
+#tab-hwdiary .hd-btns{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+#tab-hwdiary .hd-btn{flex:1; min-width:120px; border:0; border-radius:999px; padding:13px 14px; font-size:.78rem; font-weight:800; font-family:inherit; color:#fff; cursor:pointer;
+  background:linear-gradient(135deg,var(--h-v1),var(--h-v2)); box-shadow:0 8px 16px rgba(242,106,27,.28); transition:transform .1s}
+#tab-hwdiary .hd-btn:active{transform:scale(.97)}
+#tab-hwdiary .hd-btn.green{background:linear-gradient(135deg,#2bc16a,#138a3d); box-shadow:0 8px 16px rgba(19,138,61,.28)}
+#tab-hwdiary .hd-btn.grey{background:#fff; color:var(--ink); border:1.5px solid var(--h-line); box-shadow:none}
+#tab-hwdiary .hd-btn.small{flex:none; min-width:0; padding:7px 13px; font-size:.72rem; box-shadow:none}
+#tab-hwdiary .hd-btn.edit{background:#e8f1fb; color:#1f5f99}
+#tab-hwdiary .hd-btn.remove{background:#fdeaea; color:var(--h-red)}
+#tab-hwdiary .hint{font-size:.68rem; font-weight:600; color:var(--h-muted); margin:6px 3px 0; padding:0}
+#tab-hwdiary .hd-msg{color:var(--h-v2); font-size:.78rem; font-weight:700; margin-top:10px; min-height:16px; text-align:center}
+#tab-hwdiary .hd-list{margin-top:12px}
+#tab-hwdiary .hd-item{display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap; background:var(--h-field); border:1.5px solid var(--h-line); border-radius:16px; padding:10px; margin-bottom:8px}
+#tab-hwdiary .hd-tag{background:linear-gradient(135deg,var(--h-v1),var(--h-v2)); color:#fff; font-weight:800; font-size:.72rem; padding:5px 11px; border-radius:999px; white-space:nowrap}
+#tab-hwdiary .hd-hw{flex:1; min-width:0; white-space:pre-line; font-size:.9rem; font-weight:600; line-height:1.45; direction:auto; text-align:start; color:var(--ink)}
+#tab-hwdiary .hd-acts{display:flex; gap:6px}
+#tab-hwdiary .hd-empty{text-align:center; color:var(--h-muted); padding:16px; border:2px dashed var(--h-line); border-radius:16px; font-size:.78rem; font-weight:600}
+html[data-theme] #tab-hwdiary{--ink:var(--t-ink); --h-field:var(--t-field); --h-line:var(--t-line); --h-muted:var(--t-muted); --h-soft:var(--t-orangesoft)}
+html[data-theme] #tab-hwdiary .card{background:var(--t-card) !important; border-color:var(--t-line) !important; color:var(--t-ink)}
+html[data-theme] #tab-hwdiary .card h2{color:#fff}
+html[data-theme] #tab-hwdiary .hd-btn.grey{background:var(--t-card) !important; color:var(--t-ink) !important}
+html[data-theme] #tab-hwdiary .hd-btn.edit{background:var(--t-field) !important; color:var(--t-ink) !important}
+html[data-theme] #tab-hwdiary .hd-btn.remove{background:var(--t-field) !important; color:#ff8a80 !important}
+html[data-theme="gold"] #tab-hwdiary{--h-v1:#eebd45; --h-v2:#c4900f}
 /* picture preview overlay (moved to <body> by script so it can cover the whole screen) */
 #reg-pv{position:fixed; inset:0; z-index:80; background:rgba(10,20,30,.75); display:none; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:14px}
 #reg-pv.on{display:flex}
@@ -1844,6 +1897,14 @@ html[data-theme] #tab-homework label.hw-chip.on *{color:#fff !important}
 #tab-homework .hw-grid .hw-lab{font-size:12px; margin-bottom:4px; white-space:nowrap}
 #tab-homework .hw-grid select,#tab-homework .hw-grid input[type="text"]{width:100%; min-width:0; font-size:13px; padding-left:10px; padding-right:24px; text-overflow:ellipsis}
 #tab-homework .hw-grid input[type="text"]{padding-right:10px}
+/* wider fields */
+body.view-hw{padding-left:6px; padding-right:6px}
+#tab-homework .hw-card{padding:14px 10px}
+#tab-homework .hw-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+#tab-homework .hw-grid .hw-full{grid-column:1 / -1}
+#tab-homework .hw-grid select,#tab-homework .hw-grid input[type="text"]{font-size:15px; padding-top:13px; padding-bottom:13px}
+#tab-homework .hw-grid .hw-lab{font-size:13px}
+#tab-homework .student-input{font-size:15px}
 /* Fee Receipt: Date + Receipt No. + Class in one row; Month + Arrears in one row */
 .fr-row3{display:grid; grid-template-columns:1.25fr 1fr .8fr; gap:8px}
 .fr-row3 .field,.fr-row2 .field{min-width:0}
@@ -1948,7 +2009,7 @@ html body.view-section{padding-bottom:78px !important}
   </symbol>
 <symbol id="b-facebook" viewBox="0 0 24 24"><path fill="#1877F2" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
 <symbol id="b-tiktok" viewBox="0 0 24 24"><g transform="translate(-.9 .7)"><path fill="#25F4EE" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></g><g transform="translate(.9 -.7)"><path fill="#FE2C55" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></g><path fill="#000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol><symbol id="i-register" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M8 14l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></symbol><symbol id="i-filetext" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol><symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M5 22h14M5 2h14"/><path d="M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22"/><path d="M7 2v4.17a2 2 0 0 0 .59 1.42L12 12l4.41-4.41A2 2 0 0 0 17 6.17V2"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol><symbol id="i-cloudsun" viewBox="0 0 24 24"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M19.07 4.93l-1.41 1.41M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-chevdown" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-notebook" viewBox="0 0 24 24"><path d="M2 6h4M2 10h4M2 14h4M2 18h4"/><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M16 2v20"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol><symbol id="i-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/><path d="M8 10h8"/></symbol><symbol id="i-highlighter" viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></symbol></svg>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol><symbol id="i-diary" viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18"/><path d="M10 8h6"/><path d="M10 12h6"/><path d="M10 16h4"/></symbol><symbol id="i-register" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M8 14l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></symbol><symbol id="i-filetext" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol><symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol><symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M5 22h14M5 2h14"/><path d="M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22"/><path d="M7 2v4.17a2 2 0 0 0 .59 1.42L12 12l4.41-4.41A2 2 0 0 0 17 6.17V2"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol><symbol id="i-cloudsun" viewBox="0 0 24 24"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M19.07 4.93l-1.41 1.41M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-chevdown" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-notebook" viewBox="0 0 24 24"><path d="M2 6h4M2 10h4M2 14h4M2 18h4"/><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M16 2v20"/></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol><symbol id="i-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/><path d="M8 10h8"/></symbol><symbol id="i-highlighter" viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></symbol></svg>
 <script>function ico(n){return '<svg class="ico" aria-hidden="true"><use href="#i-'+n+'"/></svg>';}</script>
 <script>
 /* Inline field errors: red highlight on the field + message right under it */
@@ -4192,6 +4253,9 @@ html body.view-section{padding-bottom:78px !important}
     <button class="tile tile-register wide" type="button" data-tab="register" onclick="tryTab('register')">
       <span class="tile-ico"><svg class="ico" aria-hidden="true"><use href="#i-register"/></svg></span><span class="tile-txt"><b>Register Management</b><small>Monthly attendance register</small></span><span class="tile-chev">›</span>
     </button>
+    <button class="tile tile-hwdiary wide" type="button" data-tab="hwdiary" onclick="tryTab('hwdiary')">
+      <span class="tile-ico"><svg class="ico" aria-hidden="true"><use href="#i-diary"/></svg></span><span class="tile-txt"><b>Homework Diary</b><small>Daily homework picture</small></span><span class="tile-chev">›</span>
+    </button>
   </nav>
 
 
@@ -4527,28 +4591,28 @@ html body.view-section{padding-bottom:78px !important}
           <input type="text" id="hw-other" placeholder="Write subject name" autocomplete="off">
         </div>
 
-        <div>
+        <div class="hw-full">
           <label class="hw-lab" for="hw-teacher">Teacher</label>
           <input type="text" id="hw-teacher" placeholder="Teacher" autocomplete="name">
         </div>
 
         <input type="hidden" id="hw-date">
       </div>
+      <div class="hw-sendbar">
+        <div class="hw-sendbar-inner">
+          <div class="hw-tally"><b id="hw-tallyMain">0 students flagged</b><span id="hw-tallySub">0 students added</span></div>
+          <button class="hw-send" type="button" onclick="hwSend()"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> Send to Principal</button>
+        </div>
+      </div>
     </section>
 
     <section class="hw-card">
       <h2 class="hw-card-title"><span class="hw-dot"></span>Students report</h2>
-      <div id="hw-students"></div>
       <button class="hw-add" type="button" onclick="hwAddStudent()">＋ Add student</button>
       <div class="hw-hint">Only students with a problem appear in the report.</div>
+      <div id="hw-students" style="margin-top:10px"></div>
     </section>
 
-    <div class="hw-sendbar">
-      <div class="hw-sendbar-inner">
-        <div class="hw-tally"><b id="hw-tallyMain">0 students flagged</b><span id="hw-tallySub">0 students added</span></div>
-        <button class="hw-send" type="button" onclick="hwSend()"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> Send to Principal</button>
-      </div>
-    </div>
     <div class="hw-toast" id="hw-toast" role="status" aria-live="polite"></div>
   </section>
 
@@ -4684,6 +4748,63 @@ html body.view-section{padding-bottom:78px !important}
   <div id="reg-pv"><img id="reg-pvImg" alt="Picture preview"><div class="bar"><button type="button" class="go" id="reg-pvSave">Share</button><button type="button" id="reg-pvClose">Close</button></div></div>
 
   <button type="button" id="reg-reset">Clear everything</button>
+  </section>
+
+  <!-- ================= HOMEWORK DIARY TAB ================= -->
+  <section id="tab-hwdiary" class="tab-panel">
+    <div class="card" style="padding-bottom:18px;">
+      <div class="head-row">
+        <h1 id="hwdiaryTitle" class="panel-title" aria-label="HOMEWORK DIARY"></h1>
+        <span class="subtitle">DAILY DIARY</span>
+      </div>
+      <p class="panel-desc">Enter daily homework, save the picture to your gallery, or share it on WhatsApp.</p>
+    </div>
+
+    <div class="card">
+      <h2>Date &amp; Class</h2>
+      <div class="field">
+        <label for="hd-school">School name (shown as "NAME DIARY" on the picture)</label>
+        <input type="text" id="hd-school" placeholder="PPHS">
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="hd-date">Date</label>
+          <input type="date" id="hd-date">
+        </div>
+        <div class="field">
+          <label for="hd-cls">Class</label>
+          <select id="hd-cls"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Subject &amp; Homework</h2>
+      <div class="field">
+        <label for="hd-subj">Subject</label>
+        <select id="hd-subj"></select>
+      </div>
+      <div class="field">
+        <label for="hd-hw">Homework</label>
+        <textarea id="hd-hw" dir="auto" lang="ur" enterkeyhint="send" placeholder="Type homework here (Enter = save, Shift+Enter = new line)"></textarea>
+        <div class="hint">Press Enter to save. The next subject is selected automatically.</div>
+      </div>
+      <div class="hd-btns">
+        <button type="button" class="hd-btn" id="hd-saveBtn">Save subject</button>
+        <button type="button" class="hd-btn grey" id="hd-cancelBtn" style="display:none">Cancel</button>
+      </div>
+      <div id="hd-msg" class="hd-msg"></div>
+      <div class="hd-list" id="hd-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>Picture</h2>
+      <div class="hd-btns" style="margin-top:0">
+        <button type="button" class="hd-btn" id="hd-gallery">&#128190; Save to gallery</button>
+        <button type="button" class="hd-btn green" id="hd-share">&#128228; Share on WhatsApp</button>
+      </div>
+      <div class="hint">The picture is saved to your Downloads / Gallery folder. WhatsApp opens the share sheet.</div>
+    </div>
   </section>
 
   <!-- ================= MARKS SHEET TAB ================= -->
@@ -4926,6 +5047,7 @@ function showSection(name){
   document.body.classList.toggle("view-hw", name === "homework");
   document.body.classList.toggle("view-marks", name === "marks");
   document.body.classList.toggle("view-register", name === "register");
+  document.body.classList.toggle("view-hwdiary", name === "hwdiary");
   document.body.classList.toggle("view-attendance", name === "attendance");
   document.body.classList.toggle("view-receipt", name === "receipt");
   document.body.classList.toggle("view-admission", name === "admission");
@@ -4948,6 +5070,7 @@ function showHome(){
   document.body.classList.remove("view-hw");
   document.body.classList.remove("view-marks");
   document.body.classList.remove("view-register");
+  document.body.classList.remove("view-hwdiary");
   document.body.classList.remove("view-attendance");
   document.body.classList.remove("view-receipt");
   document.body.classList.remove("view-admission");
@@ -5044,7 +5167,7 @@ setInterval(tickLiveClock, 1000);
 const FEE_PASSWORD = APP_CONFIG.passwords.fee;   // edit in SETTINGS at the top of the file
 let feeUnlocked = sessionStorage.getItem("pps_fee_unlocked") === "1";
 let pendingTab = null;
-const OPEN_TABS = ["attendance","homework","marks","register"];
+const OPEN_TABS = ["attendance","homework","marks","register","hwdiary"];
 
 function tryTab(name){
   if(OPEN_TABS.indexOf(name) !== -1 || feeUnlocked){ proceedToTab(name); return; }
@@ -5097,6 +5220,7 @@ buildGlitchTitle("reminderTitle","FEE REMINDER");
 buildGlitchTitle("admissionTitle","ADMISSION");
 buildGlitchTitle("marksTitle","MARKS SHEET");
 buildGlitchTitle("registerTitle","REGISTER MANAGEMENT");
+buildGlitchTitle("hwdiaryTitle","HOMEWORK DIARY");
 
 /* ============================================================
    ATTENDANCE TAB — logic unchanged, ids/functions namespaced
@@ -5880,8 +6004,9 @@ showHome();
     $("hw-tallySub").textContent = rows.length + (rows.length === 1 ? " student added" : " students added");
   }
   function updateNumbers(){
-    list.querySelectorAll(".hw-row").forEach(function(row, i){
-      row.querySelector(".hw-num").textContent = i + 1;
+    var all = list.querySelectorAll(".hw-row");
+    all.forEach(function(row, i){
+      row.querySelector(".hw-num").textContent = all.length - i;
     });
   }
 
@@ -5913,7 +6038,7 @@ showHome();
     });
     row.querySelector(".student-input").addEventListener("input", refreshTally);
 
-    list.appendChild(row);
+    list.insertBefore(row, list.firstChild);
     if(focus) row.querySelector(".student-input").focus();
     updateNumbers();
     refreshTally();
@@ -5947,7 +6072,7 @@ showHome();
                  "*Teacher:* " + teacher + "\n\n";
     var valid = 0;
 
-    rows.forEach(function(row){
+    Array.prototype.slice.call(rows).reverse().forEach(function(row){
       var name = row.querySelector(".student-input").value.trim();
       if(!name) return;
       valid++;
@@ -7729,6 +7854,496 @@ document.addEventListener('click', function(e){
     var mq=window.matchMedia("print"), h=function(e){ if(e.matches) before(); else after(); };
     if(mq.addEventListener) mq.addEventListener("change",h); else if(mq.addListener) mq.addListener(h);
   }
+})();
+</script>
+
+<!-- ================= HOMEWORK DIARY SCRIPT ================= -->
+<script>
+(function(){
+const H = id => document.getElementById('hd-' + id);
+
+// Class list (fixed, in the order given)
+const CLASSES = ['10th','9th','8th-A','8th-B','7th','6th-A','6th-B','5th','4th','3rd','2nd','1st','Kindergarten','Nursery','PlayGroup-A','PlayGroup-B'];
+
+// Subjects for each class
+const BASIC = ['English','Urdu','Mathematics','Nazira Quran'];
+const SUBJECTS = {
+  'PlayGroup-A': BASIC,
+  'PlayGroup-B': BASIC,
+  'Nursery': BASIC,
+  'Kindergarten': BASIC,
+  '1st': [...BASIC, 'General Knowledge', 'Computer', 'Islamyat'],
+  '2nd': [...BASIC, 'Computer', 'Islamyat'],
+  '3rd': [...BASIC, 'Computer', 'Islamyat', 'General Knowledge'],
+  '4th': [...BASIC, 'Computer', 'Islamyat', 'General Science'],
+  '5th': [...BASIC, 'Computer', 'Islamyat', 'General Science'],
+  '6th-A': [...BASIC, 'Computer', 'Islamyat', 'General Science'],
+  '6th-B': [...BASIC, 'Computer', 'Islamyat', 'General Science'],
+  '7th': [...BASIC, 'Computer', 'Islamyat', 'General Science'],
+  '8th-A': ['English','Urdu','Mathematics','Mutalia Quran','Islamyat','Biology','Physics','Chemistry','Pakistan Studies'],
+  '8th-B': ['English','Urdu','Mathematics','Mutalia Quran','Islamyat','Biology','Physics','Chemistry','Pakistan Studies'],
+  '9th':   ['English','Urdu','Mathematics','Mutalia Quran','Islamyat','Biology','Physics','Chemistry','Pakistan Studies'],
+  '10th':  ['English','Urdu','Mathematics','Mutalia Quran','Islamyat','Biology','Physics','Chemistry','Pakistan Studies']
+};
+
+// Colour themes: banner, class pill, table header and borders use "main";
+// the picture background is a gradient from "bgTop" to "bgBot"
+const THEME_MAROON = { main: '#7a1f2b', light: '#fbeef0', bgTop: '#fbe9ec', bgBot: '#efc9d0' };
+const THEME_GREEN  = { main: '#1e6b3c', light: '#eef8f1', bgTop: '#eefaf2', bgBot: '#c9ebd5' };
+const THEME_PINK   = { main: '#b0175a', light: '#fdeef5', bgTop: '#fdf0f7', bgBot: '#f7c9de' };
+const MAROON_CLASSES = ['PlayGroup-A','PlayGroup-B','Nursery','Kindergarten','1st','2nd'];
+function themeFor(cls){
+  if (cls === '8th-B') return THEME_PINK;
+  if (MAROON_CLASSES.includes(cls)) return THEME_MAROON;
+  return THEME_GREEN;
+}
+
+const DEFAULT_SCHOOL = 'PPHS';
+
+let db = JSON.parse(localStorage.getItem('hwdiary') || 'null') || { entries: {} };
+db.entries = db.entries || {};
+if (!db.school) db.school = DEFAULT_SCHOOL;
+let editingSubject = null;   // subject currently being edited (null = new entry)
+
+function save(){ localStorage.setItem('hwdiary', JSON.stringify(db)); }
+function msg(t){ H('msg').textContent = t; }
+function esc(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function localDate(){ const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+function key(){ return H('date').value + '|' + H('cls').value; }
+function curEntries(){ return db.entries[key()] || []; }
+function fmtDate(){
+  const [y,m,d] = H('date').value.split('-');
+  return new Date(y, m-1, d).toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+}
+const isUrdu = s => /[\u0600-\u06FF]/.test(s);
+
+function fillSelect(sel, list){
+  sel.innerHTML = '';
+  list.forEach(x => { const o = document.createElement('option'); o.value = o.textContent = x; sel.appendChild(o); });
+}
+
+// Subject dropdown shows only the subjects of the selected class
+function refreshSubjects(){
+  fillSelect(H('subj'), SUBJECTS[H('cls').value] || []);
+}
+
+function nextSubject(){
+  const list = SUBJECTS[H('cls').value] || [];
+  const i = list.indexOf(H('subj').value);
+  if (i >= 0 && i < list.length - 1) H('subj').value = list[i + 1];
+  H('subj').focus();
+}
+
+function setEditMode(on){
+  H('saveBtn').textContent = on ? 'Update subject' : 'Save subject';
+  H('cancelBtn').style.display = on ? 'inline-block' : 'none';
+}
+
+function cancelEdit(){
+  editingSubject = null;
+  H('hw').value = '';
+  setEditMode(false);
+  msg('');
+}
+
+function saveHomework(){
+  const s = H('subj').value, h = H('hw').value.trim();
+  if (!H('cls').value || !s) return msg('Please select class and subject');
+  if (!h) { H('hw').focus(); return msg('Please type the homework'); }
+  const k = key();
+  db.entries[k] = db.entries[k] || [];
+  const ex = db.entries[k].find(e => e.subject === s);
+  if (ex) ex.homework = h; else db.entries[k].push({subject: s, homework: h});
+  save();
+  H('hw').value = '';
+  editingSubject = null;
+  setEditMode(false);
+  renderList();
+  msg('Saved: ' + s);
+  nextSubject();
+}
+
+// Enter saves; Shift+Enter makes a new line
+H('hw').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+    e.preventDefault();
+    saveHomework();
+  }
+});
+
+function editEntry(i){
+  const e = curEntries()[i];
+  if (!e) return;
+  editingSubject = e.subject;
+  H('subj').value = e.subject;
+  H('hw').value = e.homework;
+  setEditMode(true);
+  msg('Editing: ' + e.subject + '. Change the text and press Update.');
+  H('hw').focus();
+}
+
+function renderList(){
+  const list = curEntries();
+  H('list').innerHTML = list.length
+    ? list.map((e,i) => `
+        <div class="hd-item">
+          <span class="hd-tag">${esc(e.subject)}</span>
+          <div class="hd-hw">${esc(e.homework)}</div>
+          <div class="hd-acts">
+            <button type="button" class="hd-btn small edit" data-act="edit" data-i="${i}">Edit</button>
+            <button type="button" class="hd-btn small remove" data-act="del" data-i="${i}">Remove</button>
+          </div>
+        </div>`).join('')
+    : '<div class="hd-empty">No homework added yet</div>';
+}
+
+function delEntry(i){
+  const k = key();
+  const removed = db.entries[k][i];
+  db.entries[k].splice(i, 1);
+  if (!db.entries[k].length) delete db.entries[k];
+  if (editingSubject && removed && removed.subject === editingSubject) cancelEdit();
+  save();
+  renderList();
+}
+
+function rr(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// ---------- Picture (landscape) ----------
+const FONT_EN = 'Poppins, sans-serif';
+const FONT_UR = '"Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif';
+const F_SUB    = `bold 34px ${FONT_EN}`;   // subject column
+const F_TXT    = `bold 32px ${FONT_EN}`;   // homework (English)
+const F_UR     = `bold 42px ${FONT_UR}`;   // homework (Urdu, Nastaliq)
+const F_HEAD   = `bold 34px ${FONT_EN}`;
+const F_DATE   = `500 30px ${FONT_EN}`;
+const F_LABEL  = `bold 32px ${FONT_EN}`;
+
+const W = 1400;
+const LEFT_X = 40, LEFT_W = 180;          // class pill on the left
+const TABLE_X = 260, TABLE_W = 1100;      // table + banner on the right
+const BANNER_Y = 40, BANNER_H = 170;
+const TABLE_Y = BANNER_Y + BANNER_H + 30;
+const SUB_COL = 320;
+const CELL_PX = 24, CELL_PY = 18;
+const HDR_H = 80;
+const LH = 52, LH_SUB = 46, LH_UR = 84;
+const HW_MAX = (TABLE_W - SUB_COL) - CELL_PX * 2;
+const SUB_MAX = SUB_COL - CELL_PX * 2;
+const R = 30;
+
+// Wrap text into lines that fit maxW (keeps manual line breaks)
+function wrap(ctx, text, maxW){
+  const out = [];
+  text.split('\n').forEach(par => {
+    let cur = '';
+    par.split(' ').forEach(w => {
+      const t = cur ? cur + ' ' + w : w;
+      if (ctx.measureText(t).width > maxW && cur) { out.push(cur); cur = w; }
+      else cur = t;
+    });
+    out.push(cur);
+  });
+  return out;
+}
+
+// Lay out each row: subject on the left, homework on the right
+function layout(ctx, entries){
+  return entries.map(e => {
+    const rtl = isUrdu(e.homework);
+    ctx.font = F_SUB;
+    const subLines = wrap(ctx, e.subject, SUB_MAX);
+    ctx.font = rtl ? F_UR : F_TXT;
+    const hwLines = wrap(ctx, e.homework, HW_MAX);
+    const subH = subLines.length * LH_SUB;
+    const hwH = hwLines.length * (rtl ? LH_UR : LH);
+    return { subLines, hwLines, rtl, subH, hwH, h: Math.max(subH, hwH) + CELL_PY * 2 };
+  });
+}
+
+// Fit text to a maximum width by shrinking the font size
+function fitFont(ctx, text, maxSize, minSize, maxWidth, family){
+  let fs = maxSize;
+  ctx.font = `bold ${fs}px ${family}`;
+  while (ctx.measureText(text).width > maxWidth && fs > minSize) {
+    fs -= 2;
+    ctx.font = `bold ${fs}px ${family}`;
+  }
+}
+
+function buildCanvas(){
+  const cls = H('cls').value, dateTxt = fmtDate();
+  const title = ((H('school').value.trim() || DEFAULT_SCHOOL) + ' DIARY').toUpperCase();
+  const theme = themeFor(cls);
+  const c = document.createElement('canvas');
+  c.width = W;
+  const ctx = c.getContext('2d');
+  const rows = layout(ctx, curEntries());
+
+  const tableH = HDR_H + rows.reduce((a, r) => a + r.h, 0);
+  const tableBottom = TABLE_Y + tableH;
+  c.height = tableBottom + 102 + 40;
+
+  // Gradient background (not plain white)
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, c.height);
+  bgGrad.addColorStop(0, theme.bgTop);
+  bgGrad.addColorStop(1, theme.bgBot);
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, c.height);
+
+  // Class pill on the left: same height as the banner + table, white inside, coloured border
+  const pillH = tableBottom - BANNER_Y;   // same top as the banner, same bottom as the table
+  const pillX = LEFT_X + 5, pillY = BANNER_Y + 5, pillW = LEFT_W - 10, pillR = 22;
+  rr(ctx, pillX, pillY, pillW, pillH - 10, pillR);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.strokeStyle = theme.main;
+  ctx.lineWidth = 10;
+  rr(ctx, pillX, pillY, pillW, pillH - 10, pillR);
+  ctx.stroke();
+
+  ctx.save();
+  ctx.translate(LEFT_X + LEFT_W/2, BANNER_Y + pillH/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillStyle = theme.main;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  fitFont(ctx, cls, 90, 36, pillH - 120, FONT_EN);
+  ctx.fillText(cls, 0, 0);
+  ctx.restore();
+
+  // Rounded banner across the top: "SCHOOL NAME DIARY"
+  ctx.fillStyle = theme.main;
+  rr(ctx, TABLE_X, BANNER_Y, TABLE_W, BANNER_H, 24); ctx.fill();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#ffffff';
+  fitFont(ctx, title, 56, 26, TABLE_W - 120, FONT_EN);
+  ctx.fillText(title, TABLE_X + TABLE_W/2, BANNER_Y + BANNER_H/2);
+
+  // Table
+  ctx.save();
+  rr(ctx, TABLE_X, TABLE_Y, TABLE_W, tableH, R);
+  ctx.clip();
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(TABLE_X, TABLE_Y, TABLE_W, tableH);
+
+  // Header row: Subjects | Homework Details
+  ctx.fillStyle = theme.main;
+  ctx.fillRect(TABLE_X, TABLE_Y, TABLE_W, HDR_H);
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.font = F_HEAD;
+  ctx.fillText('Subjects', TABLE_X + CELL_PX, TABLE_Y + HDR_H/2);
+  ctx.fillText('Homework Details', TABLE_X + SUB_COL + CELL_PX, TABLE_Y + HDR_H/2);
+
+  // Body rows
+  let y = TABLE_Y + HDR_H;
+  rows.forEach((r, i) => {
+    ctx.fillStyle = i % 2 ? theme.light : '#ffffff';
+    ctx.fillRect(TABLE_X, y, TABLE_W, r.h);
+    if (i > 0) {
+      ctx.fillStyle = theme.main;
+      ctx.globalAlpha = 0.25;
+      ctx.fillRect(TABLE_X, y, TABLE_W, 2);
+      ctx.globalAlpha = 1;
+    }
+
+    // Subject (left column, vertically centred)
+    const subTop = y + (r.h - r.subH) / 2;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = F_SUB;
+    ctx.fillStyle = theme.main;
+    r.subLines.forEach((ln, j) => ctx.fillText(ln, TABLE_X + CELL_PX, subTop + 34 + j * LH_SUB));
+
+    // Homework (right column, vertically centred)
+    const hwTop = y + (r.h - r.hwH) / 2;
+    ctx.fillStyle = '#1f2d3d';
+    if (r.rtl) {
+      ctx.font = F_UR;
+      ctx.direction = 'rtl';
+      ctx.textAlign = 'right';
+      r.hwLines.forEach((ln, j) => ctx.fillText(ln, TABLE_X + TABLE_W - CELL_PX, hwTop + LH_UR * 0.75 + j * LH_UR));
+      ctx.direction = 'ltr';
+    } else {
+      ctx.font = F_TXT;
+      ctx.textAlign = 'left';
+      r.hwLines.forEach((ln, j) => ctx.fillText(ln, TABLE_X + SUB_COL + CELL_PX, hwTop + 36 + j * LH));
+    }
+    y += r.h;
+  });
+
+  // Column divider
+  ctx.fillStyle = theme.main;
+  ctx.globalAlpha = 0.5;
+  ctx.fillRect(TABLE_X + SUB_COL, TABLE_Y, 3, tableH);
+  ctx.globalAlpha = 1;
+  ctx.restore();
+
+  // Table border in the theme colour
+  ctx.strokeStyle = theme.main;
+  ctx.lineWidth = 8;
+  rr(ctx, TABLE_X, TABLE_Y, TABLE_W, tableH, R);
+  ctx.stroke();
+
+  // Date: label and pill at the bottom right
+  const dateY = tableBottom + 70;
+  ctx.font = F_DATE;
+  const dw = ctx.measureText(dateTxt).width;
+  const datePillW = Math.max(dw + 60, 320), datePillH = 64;
+  const datePillX = TABLE_X + TABLE_W - datePillW, datePillY = dateY - datePillH/2;
+  ctx.fillStyle = '#ffffff';
+  rr(ctx, datePillX, datePillY, datePillW, datePillH, 22); ctx.fill();
+  ctx.strokeStyle = theme.main;
+  ctx.lineWidth = 4;
+  rr(ctx, datePillX, datePillY, datePillW, datePillH, 22); ctx.stroke();
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#1f2d3d';
+  ctx.font = F_DATE;
+  ctx.fillText(dateTxt, datePillX + datePillW/2, dateY);
+  ctx.font = F_LABEL;
+  ctx.fillStyle = theme.main;
+  ctx.textAlign = 'right';
+  ctx.fillText('Date:', datePillX - 16, dateY);
+
+  // Single black border around the whole picture
+  ctx.strokeStyle = '#000000';
+  ctx.lineWidth = 10;
+  ctx.strokeRect(5, 5, W - 10, c.height - 10);
+
+  return c;
+}
+
+// Make sure the fonts are loaded before drawing on the canvas
+async function ensureFonts(){
+  try {
+    await Promise.all([
+      document.fonts.load(F_SUB), document.fonts.load(F_TXT),
+      document.fonts.load(F_UR), document.fonts.load(F_HEAD),
+      document.fonts.load(F_DATE), document.fonts.load(F_LABEL)
+    ]);
+  } catch (e) { /* fall back to system fonts */ }
+}
+
+function dataUrlToBlob(u){
+  const b = atob(u.split(',')[1]);
+  const a = new Uint8Array(b.length);
+  for (let i = 0; i < b.length; i++) a[i] = b.charCodeAt(i);
+  return new Blob([a], {type: 'image/png'});
+}
+
+function fileName(){ return `homework-${H('cls').value}-${H('date').value}.png`; }
+
+// Save picture to the device (goes to Downloads / Gallery)
+async function saveToGallery(){
+  if (!curEntries().length) return msg('Please save homework first');
+  await ensureFonts();
+  const a = document.createElement('a');
+  a.href = buildCanvas().toDataURL('image/png');
+  a.download = fileName();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  msg('Picture saved');
+}
+
+function summary(){
+  return `*${H('cls').value}* - ${fmtDate()}\n\n` +
+    curEntries().map(e => `*${e.subject}:* ${e.homework}`).join('\n');
+}
+
+// After the picture has been sent, the saved homework is cleared on the next page refresh
+function markSent(){
+  db.sentPending = true;
+  save();
+}
+
+async function shareWA(){
+  if (!curEntries().length) return msg('Please save homework first');
+  await ensureFonts();
+  const url = buildCanvas().toDataURL('image/png');
+  const file = new File([dataUrlToBlob(url)], fileName(), {type: 'image/png'});
+  if (navigator.canShare && navigator.canShare({files: [file]})) {
+    try {
+      await navigator.share({files: [file], title: 'Homework'});
+      markSent();
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+    }
+  }
+  // Fallback (desktop): save picture and open WhatsApp with the text
+  saveToGallery();
+  window.open('https://wa.me/?text=' + encodeURIComponent(summary()), '_blank');
+  markSent();
+  msg('Picture saved. Attach it in WhatsApp.');
+}
+
+// Events
+H('cls').onchange = () => { cancelEdit(); refreshSubjects(); renderList(); };
+H('date').onchange = () => { cancelEdit(); renderList(); };
+H('school').oninput = () => { db.school = H('school').value; save(); };
+H('saveBtn').addEventListener('click', saveHomework);
+H('cancelBtn').addEventListener('click', cancelEdit);
+H('gallery').addEventListener('click', saveToGallery);
+H('share').addEventListener('click', shareWA);
+H('list').addEventListener('click', e => {
+  const b = e.target.closest('button[data-act]');
+  if (!b) return;
+  const i = +b.dataset.i;
+  if (b.dataset.act === 'edit') editEntry(i); else delEntry(i);
+});
+
+// Init
+// If the picture was sent before this refresh, clear all the saved homework
+if (db.sentPending) {
+  db.entries = {};
+  db.sentPending = false;
+  save();
+}
+H('date').value = localDate();
+H('school').value = db.school;
+fillSelect(H('cls'), CLASSES);
+refreshSubjects();
+renderList();
+ensureFonts();
+
+})();
+</script>
+
+<!-- ================= KEYBOARD: keep the active field visible ================= -->
+<script>
+(function(){
+  var t;
+  function isField(el){
+    return el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) && !/^(checkbox|radio|button|submit|range|color|file|hidden)$/.test(el.type || "");
+  }
+  function show(el){ if(document.activeElement === el) try{ el.scrollIntoView({block:"center", behavior:"smooth"}); }catch(e){} }
+  document.addEventListener("focusin", function(e){
+    if(!isField(e.target)) return;
+    clearTimeout(t);
+    document.body.classList.add("kb-open");
+    setTimeout(function(){ show(e.target); }, 300);
+    setTimeout(function(){ show(e.target); }, 650);
+  });
+  document.addEventListener("focusout", function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ if(!isField(document.activeElement)) document.body.classList.remove("kb-open"); }, 250);
+  });
+  if(window.visualViewport) window.visualViewport.addEventListener("resize", function(){
+    var a = document.activeElement; if(isField(a)) show(a);
+  });
 })();
 </script>
 </body>
